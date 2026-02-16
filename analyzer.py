@@ -15,6 +15,27 @@ import argparse
 from datetime import date
 from pathlib import Path
 
+
+def load_env():
+    """Load .env file from script directory if it exists."""
+    env_file = Path(__file__).parent / ".env"
+    if not env_file.exists():
+        return
+    with open(env_file, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if "=" in line:
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip('"').strip("'")
+                if key and key not in os.environ:
+                    os.environ[key] = value
+
+
+load_env()
+
 # ============================================================
 # Settings
 # ============================================================

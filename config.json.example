@@ -1,0 +1,5 @@
+{
+  "employee_name": "従業員の名前",
+  "interval_minutes": 10,
+  "gdrive_base": "G:/マイドライブ/work_monitor"
+}

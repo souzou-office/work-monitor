@@ -1,0 +1,120 @@
+{
+  "date": "2026-02-13",
+  "generated_at": "2026-02-13T18:15:00",
+  "employees": {
+    "池田龍太": {
+      "summary": {
+        "total_hours": "8h 10m",
+        "focus_score": 88,
+        "top_app": "申請用総合ソフト",
+        "top_app_pct": 45,
+        "total_chars": 15200
+      },
+      "time_breakdown": [
+        {"label": "登記申請書作成", "pct": 45, "color": "#4f46e5"},
+        {"label": "オンライン申請", "pct": 18, "color": "#10b981"},
+        {"label": "メール対応", "pct": 15, "color": "#0891b2"},
+        {"label": "調査・確認", "pct": 12, "color": "#8b5cf6"},
+        {"label": "その他", "pct": 10, "color": "#9ca3af"}
+      ],
+      "timeline": [
+        {"time": "09:00", "label": "メール確認", "desc": "Outlook - 法務局からの通知確認", "category": "email"},
+        {"time": "09:20", "label": "登記申請書作成", "desc": "申請用総合ソフト - 相続登記3件", "category": "work"},
+        {"time": "11:30", "label": "オンライン申請", "desc": "登記ねっと - 申請データ送信5件", "category": "work"},
+        {"time": "12:00", "label": "昼休憩", "desc": "", "category": "idle"},
+        {"time": "13:00", "label": "登記申請書作成", "desc": "申請用総合ソフト - 抵当権抹消登記", "category": "work"},
+        {"time": "15:00", "label": "法務局確認", "desc": "ブラウザ - 登記完了確認・補正対応", "category": "work"},
+        {"time": "16:00", "label": "メール対応", "desc": "Outlook - 依頼者への完了報告3件", "category": "email"},
+        {"time": "17:00", "label": "翌日準備", "desc": "案件確認・書類準備", "category": "work"}
+      ],
+      "activity_bars": {
+        "09": [50, 40, 0, 10, 0],
+        "10": [85, 0, 0, 5, 10],
+        "11": [70, 0, 0, 15, 15],
+        "12": [0, 0, 0, 100, 0],
+        "13": [90, 0, 0, 5, 5],
+        "14": [85, 0, 0, 10, 5],
+        "15": [60, 0, 0, 10, 30],
+        "16": [20, 65, 0, 10, 5],
+        "17": [50, 0, 0, 50, 0]
+      },
+      "focus_hours": [9, 18],
+      "focus_data": [75, 90, 82, 10, 92, 88, 70, 65, 40],
+      "suggestions": [
+        {
+          "level": "mid",
+          "title": "相続登記のテンプレート活用",
+          "desc": "同種の相続登記が複数件ある場合、テンプレートを活用してデータ入力を効率化できます。ベースとなる申請書を複製して修正する方法が有効です。"
+        },
+        {
+          "level": "low",
+          "title": "集中度が高い午後を継続活用",
+          "desc": "13:00-15:00の集中度が非常に高いです。この時間帯に複雑な案件を配置する現在の運用は理想的です。"
+        }
+      ],
+      "screenshot_files": [],
+      "window_log": [
+        {"timestamp": "2026-02-13T09:02:10", "process_name": "OUTLOOK.EXE", "active_window": "受信トレイ - Outlook"},
+        {"timestamp": "2026-02-13T09:20:30", "process_name": "申請用総合ソフト.exe", "active_window": "申請用総合ソフト - 相続登記申請書"},
+        {"timestamp": "2026-02-13T11:30:15", "process_name": "chrome.exe", "active_window": "登記・供託オンライン申請システム - Google Chrome"},
+        {"timestamp": "2026-02-13T13:05:40", "process_name": "申請用総合ソフト.exe", "active_window": "申請用総合ソフト - 抵当権抹消登記申請書"},
+        {"timestamp": "2026-02-13T15:00:20", "process_name": "chrome.exe", "active_window": "登記情報提供サービス - Google Chrome"},
+        {"timestamp": "2026-02-13T16:00:50", "process_name": "OUTLOOK.EXE", "active_window": "登記完了のお知らせ - Outlook"}
+      ]
+    },
+    "田中美咲": {
+      "summary": {
+        "total_hours": "7h 50m",
+        "focus_score": 80,
+        "top_app": "Word",
+        "top_app_pct": 35,
+        "total_chars": 11200
+      },
+      "time_breakdown": [
+        {"label": "書類作成(Word)", "pct": 35, "color": "#4f46e5"},
+        {"label": "メール対応", "pct": 22, "color": "#0891b2"},
+        {"label": "経理処理", "pct": 18, "color": "#f59e0b"},
+        {"label": "電話/来客対応", "pct": 15, "color": "#ef4444"},
+        {"label": "その他", "pct": 10, "color": "#9ca3af"}
+      ],
+      "timeline": [
+        {"time": "09:00", "label": "メール確認", "desc": "Outlook - 受信メール処理", "category": "email"},
+        {"time": "09:40", "label": "書類作成", "desc": "Word - 遺産分割協議書ドラフト", "category": "work"},
+        {"time": "11:00", "label": "来客対応", "desc": "新規相談者の受付・ヒアリング", "category": "meeting"},
+        {"time": "12:00", "label": "昼休憩", "desc": "", "category": "idle"},
+        {"time": "13:00", "label": "経理処理", "desc": "Excel - 月次経理データ入力", "category": "work"},
+        {"time": "14:30", "label": "書類作成", "desc": "Word - 相続関係説明図作成", "category": "work"},
+        {"time": "16:00", "label": "メール送信", "desc": "Outlook - 書類確認依頼送付", "category": "email"},
+        {"time": "17:00", "label": "退勤準備", "desc": "", "category": "idle"}
+      ],
+      "activity_bars": {
+        "09": [45, 35, 0, 10, 10],
+        "10": [70, 10, 0, 10, 10],
+        "11": [10, 0, 60, 20, 10],
+        "12": [0, 0, 0, 100, 0],
+        "13": [75, 0, 0, 15, 10],
+        "14": [80, 0, 0, 10, 10],
+        "15": [70, 10, 0, 10, 10],
+        "16": [25, 55, 0, 10, 10],
+        "17": [20, 0, 0, 80, 0]
+      },
+      "focus_hours": [9, 18],
+      "focus_data": [70, 78, 50, 10, 82, 85, 75, 60, 30],
+      "suggestions": [
+        {
+          "level": "mid",
+          "title": "書類テンプレートの整備",
+          "desc": "遺産分割協議書や相続関係説明図のテンプレートを整備し、入力項目を最小限にすることで作成時間を短縮できます。"
+        }
+      ],
+      "screenshot_files": [],
+      "window_log": [
+        {"timestamp": "2026-02-13T09:00:15", "process_name": "OUTLOOK.EXE", "active_window": "受信トレイ - Outlook"},
+        {"timestamp": "2026-02-13T09:40:30", "process_name": "WINWORD.EXE", "active_window": "遺産分割協議書_山田様.docx - Word"},
+        {"timestamp": "2026-02-13T13:05:20", "process_name": "EXCEL.EXE", "active_window": "月次経理_202602.xlsx - Excel"},
+        {"timestamp": "2026-02-13T14:30:45", "process_name": "WINWORD.EXE", "active_window": "相続関係説明図_山田様.docx - Word"},
+        {"timestamp": "2026-02-13T16:00:30", "process_name": "OUTLOOK.EXE", "active_window": "書類確認のお願い - Outlook"}
+      ]
+    }
+  }
+}

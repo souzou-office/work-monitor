@@ -1,0 +1,72 @@
+name: Build Recorder EXE
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "recorder.py"
+      - "setup_employee.bat"
+      - ".github/workflows/build-exe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install pyinstaller pillow pynput
+
+      - name: Build EXE
+        run: pyinstaller --onefile --noconsole --name work_recorder recorder.py
+
+      - name: Create release package
+        run: |
+          mkdir release
+          copy dist\work_recorder.exe release\
+          copy setup_employee.bat release\
+          copy config.json.example release\
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: work-monitor-employee
+          path: release/
+
+      - name: Get date
+        id: date
+        run: echo "date=$(Get-Date -Format 'yyyy-MM-dd')" >> $env:GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ steps.date.outputs.date }}-${{ github.run_number }}
+          name: Work Monitor ${{ steps.date.outputs.date }}
+          body: |
+            ## 従業員PC配布用ファイル
+
+            `work-monitor-employee.zip` をダウンロードして従業員に配布してください。
+
+            ### 中身
+            - `work_recorder.exe` - 録画プログラム
+            - `setup_employee.bat` - セットアップ（名前入力＆自動起動登録）
+            - `config.json.example` - 設定ファイルの雛形
+
+            ### 使い方
+            1. ZIPを展開
+            2. `setup_employee.bat` をダブルクリック
+            3. 名前を入力 → 完了！
+          files: |
+            dist/work_recorder.exe
+            setup_employee.bat
+            config.json.example

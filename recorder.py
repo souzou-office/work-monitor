@@ -22,7 +22,7 @@ from datetime import datetime
 from pathlib import Path
 
 # ============================================================
-# Settings (change per employee)
+# Default settings (overridden by config.json if present)
 # ============================================================
 EMPLOYEE_NAME = "池田龍太"
 INTERVAL_MINUTES = 10
@@ -31,6 +31,19 @@ WORK_START_HOUR = 9
 WORK_END_HOUR = 23
 GDRIVE_BASE = Path("G:/マイドライブ/work_monitor")
 # ============================================================
+
+# Load config.json next to EXE (or next to .py) if it exists
+_config_path = (
+    Path(sys.executable).parent / "config.json"
+    if getattr(sys, "frozen", False)
+    else Path(__file__).parent / "config.json"
+)
+if _config_path.exists():
+    with open(_config_path, "r", encoding="utf-8") as _f:
+        _cfg = json.load(_f)
+        EMPLOYEE_NAME = _cfg.get("employee_name", EMPLOYEE_NAME)
+        INTERVAL_MINUTES = _cfg.get("interval_minutes", INTERVAL_MINUTES)
+        GDRIVE_BASE = Path(_cfg.get("gdrive_base", str(GDRIVE_BASE)))
 
 SAVE_DIR = GDRIVE_BASE / EMPLOYEE_NAME
 
