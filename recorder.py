@@ -18,7 +18,7 @@ import ctypes
 import ctypes.wintypes
 import threading
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 # ============================================================
@@ -30,6 +30,8 @@ WINDOW_CHECK_SECONDS = 2
 WORK_START_HOUR = 9
 WORK_END_HOUR = 23
 GDRIVE_BASE = Path("G:/マイドライブ/work_monitor")
+SCREENSHOT_MAX_WIDTH = 960         # resize width (None = no resize)
+SCREENSHOT_RETENTION_DAYS = 30     # auto-delete screenshots older than N days
 # ============================================================
 
 # Load config.json next to EXE (or next to .py) if it exists
@@ -44,6 +46,8 @@ if _config_path.exists():
         EMPLOYEE_NAME = _cfg.get("employee_name", EMPLOYEE_NAME)
         INTERVAL_MINUTES = _cfg.get("interval_minutes", INTERVAL_MINUTES)
         GDRIVE_BASE = Path(_cfg.get("gdrive_base", str(GDRIVE_BASE)))
+        SCREENSHOT_MAX_WIDTH = _cfg.get("screenshot_max_width", SCREENSHOT_MAX_WIDTH)
+        SCREENSHOT_RETENTION_DAYS = _cfg.get("screenshot_retention_days", SCREENSHOT_RETENTION_DAYS)
 
 SAVE_DIR = GDRIVE_BASE / EMPLOYEE_NAME
 
@@ -207,10 +211,43 @@ def take_screenshot(save_path: str) -> bool:
     try:
         from PIL import ImageGrab
         img = ImageGrab.grab()
-        img.save(save_path, "JPEG", quality=70, optimize=True)
+        if SCREENSHOT_MAX_WIDTH and img.width > SCREENSHOT_MAX_WIDTH:
+            ratio = SCREENSHOT_MAX_WIDTH / img.width
+            new_size = (SCREENSHOT_MAX_WIDTH, int(img.height * ratio))
+            img = img.resize(new_size, getattr(__import__('PIL.Image', fromlist=['Image']), 'LANCZOS', 1))
+        img.save(save_path, "JPEG", quality=60, optimize=True)
         return True
     except Exception:
         return False
+
+
+def cleanup_old_screenshots():
+    """Delete screenshot files older than SCREENSHOT_RETENTION_DAYS.
+    Skips dates with a .keep file (protected via dashboard save button).
+    Logs and window_log files are kept (tiny size).
+    """
+    if not SAVE_DIR.exists() or not SCREENSHOT_RETENTION_DAYS:
+        return
+    cutoff = (datetime.now() - timedelta(days=SCREENSHOT_RETENTION_DAYS)).strftime("%Y-%m-%d")
+    deleted = 0
+    for day_dir in SAVE_DIR.iterdir():
+        if not day_dir.is_dir():
+            continue
+        name = day_dir.name
+        if len(name) != 10 or name[4] != '-' or name[7] != '-':
+            continue
+        if name >= cutoff:
+            continue
+        if (day_dir / ".keep").exists():
+            continue
+        for f in day_dir.glob("ss_*.jpg"):
+            try:
+                f.unlink()
+                deleted += 1
+            except Exception:
+                pass
+    if deleted:
+        write_error_log(f"Cleanup: deleted {deleted} old screenshot(s) before {cutoff}")
 
 
 def record_snapshot(tracker: ActivityTracker):
@@ -256,6 +293,12 @@ def write_error_log(msg: str):
 
 def main():
     SAVE_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Clean up old screenshots on startup
+    try:
+        cleanup_old_screenshots()
+    except Exception as e:
+        write_error_log(f"Cleanup error: {e}")
 
     tracker = ActivityTracker()
     tracker.start()
