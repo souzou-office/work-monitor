@@ -30,12 +30,14 @@ DASHBOARD_HTML = r"""<!DOCTYPE html>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;-webkit-font-smoothing:antialiased}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px}
-.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-.sidebar{background:var(--bg-card);border-right:1px solid var(--border);padding:24px 0;display:flex;flex-direction:column;box-shadow:1px 0 4px rgba(0,0,0,0.03)}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{background:var(--bg-card);border-right:1px solid var(--border);padding:24px 0;display:flex;flex-direction:column;box-shadow:1px 0 4px rgba(0,0,0,0.03);position:sticky;top:0;height:100vh;overflow-y:auto}
 .logo{padding:0 24px 28px;border-bottom:1px solid var(--border);margin-bottom:20px}
 .logo h1{font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px}
 .logo-icon{width:28px;height:28px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff}
 .logo span{font-size:11px;color:var(--text-muted);display:block;margin-top:4px}
+.date-section{padding:0 12px;margin-bottom:20px}
+.date-nav-sidebar{display:flex;align-items:center;gap:6px;padding:0 12px}
 .nav-section{padding:0 12px;margin-bottom:24px}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);padding:0 12px;margin-bottom:8px;font-weight:500}
 .nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all .15s}
 .nav-item:hover{background:var(--bg-card-hover);color:var(--text-primary)}.nav-item.active{background:var(--accent-dim);color:var(--accent);font-weight:500}
@@ -43,13 +45,19 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-primary);color:va
 .employee-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all .15s}
 .employee-item:hover{background:var(--bg-card-hover);color:var(--text-primary)}.employee-item.active{background:var(--accent-dim);color:var(--accent)}
 .avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.date-btn{background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-secondary);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:inherit;transition:all .15s}
+.date-btn:hover{border-color:var(--border-light);color:var(--text-primary);background:var(--bg-card-hover)}
+.date-display{font-family:'JetBrains Mono',monospace;font-size:12px;flex:1;text-align:center;color:var(--text-primary);font-weight:500}
 .main{padding:28px 32px;overflow-y:auto;max-height:100vh}
 .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
 .header-left h2{font-size:20px;font-weight:600}.header-left p{color:var(--text-muted);font-size:13px;margin-top:2px}
-.date-nav{display:flex;align-items:center;gap:8px}
-.date-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);padding:7px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit}
-.date-btn:hover{border-color:var(--border-light);color:var(--text-primary)}
-.date-display{font-family:'JetBrains Mono',monospace;font-size:13px;min-width:110px;text-align:center}
+.header-actions{display:flex;gap:8px;align-items:center}
+.save-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);font-size:12px;font-family:inherit;cursor:pointer;transition:all .15s}
+.save-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.save-btn.saved{border-color:var(--amber);color:var(--amber);background:var(--amber-dim)}
+.save-btn svg{width:14px;height:14px}
+.dl-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);font-size:12px;font-family:inherit;cursor:pointer;transition:all .15s}
+.dl-btn:hover{border-color:var(--green);color:var(--green);background:var(--green-dim)}
 .stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
 .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-bottom:8px}
@@ -60,6 +68,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-primary);color:va
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .card-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .card-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}.card-body{padding:20px}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:8px;background:var(--accent-dim);color:var(--accent)}
 .timeline-item{display:grid;grid-template-columns:52px 12px 1fr;gap:12px;align-items:start;margin-bottom:4px;min-height:48px}
 .timeline-time{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);text-align:right;padding-top:2px}
 .timeline-dot-col{display:flex;flex-direction:column;align-items:center;height:100%}
@@ -77,6 +86,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-primary);color:va
 .legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 .chart-container{display:flex;align-items:center;gap:24px}
 .chart-canvas-wrap{width:160px;height:160px;flex-shrink:0}
+.chart-legend{flex:1}
 .chart-legend-item{display:flex;align-items:center;justify-content:space-between;padding:6px 0;font-size:13px}
 .chart-legend-left{display:flex;align-items:center;gap:8px}
 .chart-legend-color{width:10px;height:10px;border-radius:3px;flex-shrink:0}
@@ -87,11 +97,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-primary);color:va
 .suggestion-tag{display:inline-block;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500;margin-bottom:6px}
 .suggestion-high .suggestion-tag{background:rgba(79,70,229,.15);color:var(--accent)}.suggestion-mid .suggestion-tag{background:rgba(245,158,11,.15);color:var(--amber)}.suggestion-low .suggestion-tag{background:rgba(16,185,129,.15);color:var(--green)}
 .suggestion-title{font-size:13px;font-weight:600;margin-bottom:4px}.suggestion-desc{font-size:12px;color:var(--text-secondary);line-height:1.6}
-.screenshots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.screenshot-thumb{aspect-ratio:16/9;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:all .2s;position:relative}
-.screenshot-thumb:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 16px rgba(79,70,229,.1)}
-.screenshot-thumb img{width:100%;height:100%;object-fit:cover}
-.screenshot-time{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.ss-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.ss-thumb{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:all .15s;aspect-ratio:16/9;background:var(--bg-elevated)}
+.ss-thumb:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(79,70,229,.15);transform:translateY(-1px)}
+.ss-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.ss-thumb-time{position:absolute;bottom:0;left:0;right:0;padding:4px 8px;background:rgba(0,0,0,.65);color:#fff;font-size:10px;font-family:'JetBrains Mono',monospace}
+.ss-empty{color:var(--text-muted);font-size:13px;text-align:center;padding:30px 0}
 .focus-chart-wrap{height:140px}
 .log-table{width:100%;border-collapse:collapse;font-size:12px}
 .log-table th{text-align:left;padding:8px 10px;background:var(--bg-elevated);color:var(--text-muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.05em;position:sticky;top:0}
@@ -102,28 +113,52 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-primary);color:va
 .tab-btn{padding:10px 20px;font-size:13px;font-family:inherit;background:none;border:none;border-bottom:2px solid transparent;color:var(--text-muted);cursor:pointer}
 .tab-btn:hover{color:var(--text-primary)}.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
 .tab-content{display:none}.tab-content.active{display:block}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.modal-overlay.active{display:flex}
-.modal-content{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;max-width:900px;width:90%;max-height:85vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-.modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.modal-close{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:18px;padding:4px}
-.modal-body{padding:20px;overflow-y:auto;max-height:calc(85vh - 60px)}.modal-body img{width:100%;border-radius:8px;display:block;margin-bottom:16px}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lightbox.active{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+.lightbox-info{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.6);padding:6px 16px;border-radius:8px}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);color:#fff;font-size:32px;cursor:pointer;background:rgba(0,0,0,.4);border:none;padding:8px 14px;border-radius:8px;transition:background .15s}
+.lightbox-nav:hover{background:rgba(0,0,0,.7)}
+.lightbox-prev{left:16px}
+.lightbox-next{right:16px}
+.lightbox-close{position:fixed;top:16px;right:16px;color:#fff;font-size:24px;cursor:pointer;background:rgba(0,0,0,.4);border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.lightbox-close:hover{background:rgba(0,0,0,.7)}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--text-primary);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999}
 .empty-state{text-align:center;padding:80px 0;color:var(--text-muted)}
+.empty-state h3{font-size:18px;color:var(--text-secondary);margin-bottom:8px}
+.empty-state p{font-size:13px;line-height:1.8}
+.footer{padding:20px 12px;border-top:1px solid var(--border);margin-top:auto}
+.footer p{font-size:10px;color:var(--text-muted);text-align:center;line-height:1.6}
+@media(max-width:1200px){.stats-row{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:1100px){.grid-2{grid-template-columns:1fr}.stats-row{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{display:none}}
+@media(max-width:768px){.app{grid-template-columns:1fr}.sidebar{display:none}.main{padding:16px}}
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="sidebar">
-<div class="logo"><h1><div class="logo-icon">📊</div>業務モニター</h1><span>Work Analytics Dashboard</span></div>
-<div class="nav-section"><div class="nav-label">メニュー</div><div class="nav-item active">📋 ダッシュボード</div></div>
+<div class="logo"><h1><div class="logo-icon">W</div>業務モニター</h1><span>Work Analytics Dashboard</span></div>
+<div class="date-section">
+<div class="nav-label" style="padding:0 12px;margin-bottom:8px">日付</div>
+<div class="date-nav-sidebar">
+<button class="date-btn" id="prevBtn" onclick="chgDate(-1)">&#9664;</button>
+<span class="date-display" id="dateDisplay"></span>
+<button class="date-btn" id="nextBtn" onclick="chgDate(1)">&#9654;</button>
+</div>
+</div>
+<div class="nav-section"><div class="nav-label">メニュー</div><div class="nav-item active">ダッシュボード</div></div>
 <div class="nav-section"><div class="nav-label">メンバー</div><div class="employee-list" id="employeeList"></div></div>
+<div class="footer"><p>Local Dashboard Server<br>http://localhost:8080</p></div>
 </aside>
 <main class="main" id="mainContent"><div class="empty-state">読み込み中...</div></main>
 </div>
-<div class="modal-overlay" id="screenshotModal">
-<div class="modal-content"><div class="modal-header"><span class="card-title" id="modalTitle"></span><button class="modal-close" onclick="closeModal()">✕</button></div><div class="modal-body" id="modalBody"></div></div>
+<div class="toast" id="toast"></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+<button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+<button class="lightbox-nav lightbox-prev" onclick="navLightbox(event,-1)">&#9664;</button>
+<img id="lightboxImg" src="" alt="">
+<button class="lightbox-nav lightbox-next" onclick="navLightbox(event,1)">&#9654;</button>
+<div class="lightbox-info" id="lightboxInfo"></div>
 </div>
 <script>
 const CC={work:'#4f46e5',email:'#0891b2',meeting:'#f59e0b',idle:'#d1d5db',browse:'#ef4444'};
@@ -131,26 +166,36 @@ let S={date:new Date().toISOString().split('T')[0],employees:{},cur:null,names:[
 
 async function loadData(d){try{const r=await fetch('/api/data?date='+d);if(!r.ok){S.employees={};S.names=[];return}const data=await r.json();S.employees=data.employees||{};S.names=Object.keys(S.employees);if(S.names.length>0&&!S.cur)S.cur=S.names[0]}catch(e){S.employees={};S.names=[]}}
 
+function updateDateNav(){
+var saved=isDateSaved(S.date)?' \u2605':'';
+document.getElementById('dateDisplay').textContent=S.date+saved;
+}
+
 function renderEmpList(){const el=document.getElementById('employeeList');if(!S.names.length){el.innerHTML='<div style="padding:12px;font-size:12px;color:var(--text-muted)">データなし</div>';return}
 const colors=['#4f46e5','#0891b2','#10b981','#f59e0b','#ef4444','#8b5cf6'];
-el.innerHTML=S.names.map(n=>{const c=colors[n.charCodeAt(0)%colors.length];return`<div class="employee-item ${n===S.cur?'active':''}" onclick="selEmp('${n.replace(/'/g,"\\'")}')">`+`<div class="avatar" style="background:${c}18;color:${c}">${n[0]}</div>${n}</div>`}).join('')}
+el.innerHTML=S.names.map(n=>{const c=colors[n.charCodeAt(0)%colors.length];return`<div class="employee-item ${n===S.cur?'active':''}" onclick="selEmp('${n.replace(/'/g,"\\'")}')">`+`<div class="avatar" style="background:${c}18;color:${c}">${n[0]}</div>${esc(n)}</div>`}).join('')}
 
 function selEmp(n){S.cur=n;renderEmpList();render()}
 
 function render(){const m=document.getElementById('mainContent');destroyCharts();
-if(!S.cur||!S.employees[S.cur]){m.innerHTML='<div class="empty-state">データがありません</div>';return}
+if(!S.names.length){m.innerHTML='<div class="empty-state"><h3>データがありません</h3><p>'+esc(S.date)+' のレポートデータが見つかりません。<br>analyzer.py を実行してデータを生成してください。</p></div>';return}
+if(!S.cur||!S.employees[S.cur]){m.innerHTML='<div class="empty-state">従業員を選択してください</div>';return}
 const d=S.employees[S.cur],s=d.summary||{};
 const totalChars=s.total_chars?Number(s.total_chars).toLocaleString()+'字':'-';
-m.innerHTML=`<div class="header"><div class="header-left"><h2>${S.cur}の業務レポート</h2><p>日次業務分析ダッシュボード</p></div><div class="date-nav"><button class="date-btn" onclick="chgDate(-1)">◀</button><span class="date-display">${S.date}</span><button class="date-btn" onclick="chgDate(1)">▶</button></div></div>
+const isSaved=isDateSaved(S.date);
+m.innerHTML=`<div class="header"><div class="header-left"><h2>${esc(S.cur)}の業務レポート</h2><p>日次業務分析ダッシュボード</p></div><div class="header-actions"><button class="save-btn${isSaved?' saved':''}" onclick="toggleSave()" title="この日を保護（自動削除の対象外にする）"><svg viewBox="0 0 24 24" fill="${isSaved?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>${isSaved?'保護中':'保護する'}</button><button class="dl-btn" onclick="downloadReport()" title="この日のレポートをダウンロード"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>DL</button><span style="font-family:JetBrains Mono,monospace;font-size:14px;color:var(--text-muted)">${esc(S.date)}</span></div></div>
 <div class="stats-row">${sc('稼働時間',s.total_hours||'-','')}${sc('集中スコア',s.focus_score||'-','','var(--green)')}${sc('メインアプリ',s.top_app||'-',s.top_app_pct?s.top_app_pct+'%':'',null,true)}${sc('入力文字数',totalChars,'')}${sc('改善提案',(d.suggestions||[]).length,'')}</div>
-<div class="grid-2"><div class="card"><div class="card-header"><span class="card-title">⏱ 時間帯別アクティビティ</span></div><div class="card-body"><div id="actBars" class="activity-bar-container"></div><div class="activity-legend">${['var(--accent),業務アプリ','var(--cyan),メール','var(--amber),電話/打合せ','#d1d5db,離席','var(--red),ブラウザ'].map(x=>{const[bg,lb]=x.split(',');return`<div class="legend-item"><div class="legend-dot" style="background:${bg}"></div>${lb}</div>`}).join('')}</div></div></div>
-<div class="card"><div class="card-header"><span class="card-title">📊 時間配分</span></div><div class="card-body"><div class="chart-container"><div class="chart-canvas-wrap"><canvas id="pieChart"></canvas></div><div id="pieLeg" class="chart-legend"></div></div></div></div></div>
-<div class="grid-2"><div class="card"><div class="card-header"><span class="card-title">📋 タイムライン</span></div><div class="card-body"><div id="timeline" class="timeline"></div></div></div>
-<div class="card"><div class="card-header"><span class="card-title">💡 AI改善提案</span></div><div class="card-body" id="suggestions"></div></div></div>
-<div class="grid-full"><div class="card"><div class="card-header"><span class="card-title">🎯 集中度の推移</span></div><div class="card-body"><div class="focus-chart-wrap"><canvas id="focusChart"></canvas></div></div></div></div>
-<div class="grid-full"><div class="card"><div class="tab-bar"><button class="tab-btn active" onclick="switchTab(this,'tabSS')">🖥 スクリーンショット</button><button class="tab-btn" onclick="switchTab(this,'tabWL')">📝 ウィンドウログ</button></div>
-<div class="card-body"><div id="tabSS" class="tab-content active"><div id="ssGrid" class="screenshots-grid"></div></div><div id="tabWL" class="tab-content"><div id="winLog" class="log-scroll"></div></div></div></div></div>`;
-renderBars(d);renderPie(d);renderTL(d);renderSug(d);renderFocus(d);renderSS(d);renderWinLog(d)}
+<div class="grid-2"><div class="card"><div class="card-header"><span class="card-title">時間帯別アクティビティ</span></div><div class="card-body"><div id="actBars" class="activity-bar-container"></div><div class="activity-legend">${legendItems()}</div></div></div>
+<div class="card"><div class="card-header"><span class="card-title">時間配分</span></div><div class="card-body"><div class="chart-container"><div class="chart-canvas-wrap"><canvas id="pieChart"></canvas></div><div id="pieLeg" class="chart-legend"></div></div></div></div></div>
+<div class="grid-2"><div class="card"><div class="card-header"><span class="card-title">タイムライン</span></div><div class="card-body"><div id="timeline" class="timeline"></div></div></div>
+<div class="card"><div class="card-header"><span class="card-title">AI 改善提案</span></div><div class="card-body" id="suggestions"></div></div></div>
+<div class="grid-full"><div class="card"><div class="card-header"><span class="card-title">スクリーンショット</span><span class="badge" id="ssCount"></span></div><div class="card-body"><div id="ssGallery" class="ss-gallery"></div></div></div></div>
+<div class="grid-full"><div class="card"><div class="card-header"><span class="card-title">集中度の推移</span></div><div class="card-body"><div class="focus-chart-wrap"><canvas id="focusChart"></canvas></div></div></div></div>
+<div class="grid-full"><div class="card"><div class="tab-bar"><button class="tab-btn active" onclick="switchTab(this,'tabWL')">ウィンドウログ</button></div>
+<div class="card-body"><div id="tabWL" class="tab-content active"><div id="winLog" class="log-scroll"></div></div></div></div></div>`;
+renderBars(d);renderPie(d);renderTL(d);renderSug(d);renderSS(d);renderFocus(d);renderWinLog(d)}
+
+function legendItems(){return[['var(--accent)','業務アプリ'],['var(--cyan)','メール'],['var(--amber)','電話/打合せ'],['#d1d5db','離席'],['var(--red)','ブラウザ']].map(x=>'<div class="legend-item"><div class="legend-dot" style="background:'+x[0]+'"></div>'+x[1]+'</div>').join('')}
 
 function sc(l,v,sub,col,sm){return`<div class="stat-card"><div class="stat-label">${l}</div><div class="stat-value" style="${col?'color:'+col+';':''}${sm?'font-size:16px;padding-top:6px;':''}">${v}</div>${sub?'<div class="stat-sub">'+sub+'</div>':''}</div>`}
 function switchTab(btn,id){btn.parentElement.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');btn.closest('.card').querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active')}
@@ -160,22 +205,49 @@ el.innerHTML=Object.entries(bars).sort().map(([h,segs])=>{const inner=segs.map((
 
 function renderPie(d){const tb=d.time_breakdown||[];if(!tb.length)return;const ctx=document.getElementById('pieChart');if(!ctx)return;
 charts.pie=new Chart(ctx,{type:'doughnut',data:{labels:tb.map(x=>x.label),datasets:[{data:tb.map(x=>x.pct),backgroundColor:tb.map(x=>x.color),borderWidth:0,spacing:2}]},options:{responsive:true,maintainAspectRatio:true,cutout:'65%',plugins:{legend:{display:false}}}});
-document.getElementById('pieLeg').innerHTML=tb.map(x=>`<div class="chart-legend-item"><div class="chart-legend-left"><div class="chart-legend-color" style="background:${x.color}"></div>${x.label}</div><span class="chart-legend-pct">${x.pct}%</span></div>`).join('')}
+document.getElementById('pieLeg').innerHTML=tb.map(x=>`<div class="chart-legend-item"><div class="chart-legend-left"><div class="chart-legend-color" style="background:${x.color}"></div>${esc(x.label)}</div><span class="chart-legend-pct">${x.pct}%</span></div>`).join('')}
 
 function renderTL(d){const tl=d.timeline||[],el=document.getElementById('timeline');
-el.innerHTML=tl.map((x,i)=>{const c=CC[x.category]||'#9ca3af';return`<div class="timeline-item"><span class="timeline-time">${x.time}</span><div class="timeline-dot-col"><div class="timeline-dot" style="background:${c}"></div>${i<tl.length-1?'<div class="timeline-line"></div>':''}</div><div class="timeline-content"><div class="timeline-label">${x.label}</div><div class="timeline-desc">${x.desc||''}</div></div></div>`}).join('')}
+el.innerHTML=tl.map((x,i)=>{const c=CC[x.category]||'#9ca3af';return`<div class="timeline-item"><span class="timeline-time">${esc(x.time)}</span><div class="timeline-dot-col"><div class="timeline-dot" style="background:${c}"></div>${i<tl.length-1?'<div class="timeline-line"></div>':''}</div><div class="timeline-content"><div class="timeline-label">${esc(x.label)}</div><div class="timeline-desc">${esc(x.desc||'')}</div></div></div>`}).join('')}
 
 function renderSug(d){const sg=d.suggestions||[],el=document.getElementById('suggestions');if(!sg.length){el.innerHTML='<div style="color:var(--text-muted);font-size:13px">改善提案なし</div>';return}
 const ll={high:'優先度 高',mid:'優先度 中',low:'優先度 低'};
-el.innerHTML=sg.map(s=>`<div class="suggestion suggestion-${s.level}"><div class="suggestion-tag">${ll[s.level]||s.level}</div><div class="suggestion-title">${s.title}</div><div class="suggestion-desc">${s.desc}</div></div>`).join('')}
+el.innerHTML=sg.map(s=>`<div class="suggestion suggestion-${s.level}"><div class="suggestion-tag">${ll[s.level]||s.level}</div><div class="suggestion-title">${esc(s.title)}</div><div class="suggestion-desc">${esc(s.desc)}</div></div>`).join('')}
 
 function renderFocus(d){const fd=d.focus_data||[];if(!fd.length)return;const ctx=document.getElementById('focusChart');if(!ctx)return;
-const fh=d.focus_hours||[9,18];const startH=fh[0],endH=fh[1];
+const fh=d.focus_hours||[9,18];const startH=fh[0];
 const labels=fd.map((_,i)=>{const h=startH+i;return(h<10?'0':'')+h+':00'});
 charts.focus=new Chart(ctx,{type:'line',data:{labels,datasets:[{data:fd,borderColor:'#4f46e5',backgroundColor:'rgba(79,70,229,0.06)',borderWidth:2,fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#4f46e5',pointBorderColor:'#fff',pointBorderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:0,max:100,grid:{color:'#e2e4ea'},ticks:{color:'#8e92a2',font:{size:11,family:'JetBrains Mono'},stepSize:25}},x:{grid:{color:'#e2e4ea'},ticks:{color:'#8e92a2',font:{size:11,family:'JetBrains Mono'}}}},plugins:{legend:{display:false}}}})}
 
-function renderSS(d){const files=d.screenshot_files||[],el=document.getElementById('ssGrid');if(!files.length){el.innerHTML='<div style="color:var(--text-muted);font-size:13px">スクリーンショットなし</div>';return}
-el.innerHTML=files.map((f,i)=>{const t=f.timestamp.split('T')[1].substring(0,5);const src=`/api/screenshot?employee=${encodeURIComponent(S.cur)}&date=${S.date}&file=${encodeURIComponent(f.filename)}`;return`<div class="screenshot-thumb" onclick="openSS(${i})"><img src="${src}" loading="lazy"><span class="screenshot-time">${t}</span></div>`}).join('')}
+// Screenshot gallery with lightbox
+var ssItems=[];
+var ssIdx=0;
+
+function renderSS(d){const files=d.screenshot_files||[],el=document.getElementById('ssGallery'),countEl=document.getElementById('ssCount');
+ssItems=files;
+if(!files.length){el.innerHTML='<div class="ss-empty">スクリーンショットなし</div>';countEl.textContent='';return}
+countEl.textContent=files.length+'枚';
+el.innerHTML=files.map((f,i)=>{const t=f.timestamp.split('T')[1].substring(0,5);const src='/api/screenshot?employee='+encodeURIComponent(S.cur)+'&date='+S.date+'&file='+encodeURIComponent(f.filename);return'<div class="ss-thumb" onclick="openLightbox('+i+')"><img src="'+src+'" loading="lazy"><div class="ss-thumb-time">'+esc(t)+'</div></div>'}).join('')}
+
+function openLightbox(i){if(!ssItems.length)return;ssIdx=i;
+const f=ssItems[i],t=f.timestamp.split('T')[1].substring(0,5);
+const src='/api/screenshot?employee='+encodeURIComponent(S.cur)+'&date='+S.date+'&file='+encodeURIComponent(f.filename);
+document.getElementById('lightboxImg').src=src;
+document.getElementById('lightboxInfo').textContent=t+' ('+( ssIdx+1)+'/'+ssItems.length+')';
+document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden'}
+
+function closeLightbox(e){if(e&&e.target!==e.currentTarget&&!e.target.classList.contains('lightbox-close'))return;
+document.getElementById('lightbox').classList.remove('active');document.body.style.overflow=''}
+
+function navLightbox(e,delta){e.stopPropagation();
+ssIdx=(ssIdx+delta+ssItems.length)%ssItems.length;
+const f=ssItems[ssIdx],t=f.timestamp.split('T')[1].substring(0,5);
+const src='/api/screenshot?employee='+encodeURIComponent(S.cur)+'&date='+S.date+'&file='+encodeURIComponent(f.filename);
+document.getElementById('lightboxImg').src=src;
+document.getElementById('lightboxInfo').textContent=t+' ('+(ssIdx+1)+'/'+ssItems.length+')'}
+
+document.addEventListener('keydown',function(e){const lb=document.getElementById('lightbox');if(!lb.classList.contains('active'))return;
+if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')navLightbox(e,-1);if(e.key==='ArrowRight')navLightbox(e,1)});
 
 function renderWinLog(d){const log=d.window_log||[],el=document.getElementById('winLog');if(!log.length){el.innerHTML='<div style="color:var(--text-muted);font-size:13px;padding:20px">ウィンドウログなし</div>';return}
 let h='<table class="log-table"><thead><tr><th>時刻</th><th>プロセス</th><th>ウィンドウタイトル</th></tr></thead><tbody>';
@@ -183,12 +255,28 @@ log.forEach(e=>{const t=e.timestamp.split('T')[1].substring(0,8);h+=`<tr><td>${t
 h+='</tbody></table>';el.innerHTML=h}
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function openSS(i){const d=S.employees[S.cur],f=(d.screenshot_files||[])[i];if(!f)return;const t=f.timestamp.split('T')[1].substring(0,5);const src=`/api/screenshot?employee=${encodeURIComponent(S.cur)}&date=${S.date}&file=${encodeURIComponent(f.filename)}`;document.getElementById('modalTitle').textContent='スクリーンショット - '+t;document.getElementById('modalBody').innerHTML=`<img src="${src}">`;document.getElementById('screenshotModal').classList.add('active')}
-function closeModal(){document.getElementById('screenshotModal').classList.remove('active')}
-document.getElementById('screenshotModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
 function destroyCharts(){Object.values(charts).forEach(c=>c.destroy());charts={}}
-async function chgDate(delta){const d=new Date(S.date);d.setDate(d.getDate()+delta);S.date=d.toISOString().split('T')[0];S.cur=null;await loadData(S.date);renderEmpList();render()}
-(async()=>{await loadData(S.date);renderEmpList();render()})();
+
+// Save/Protect functionality (localStorage)
+function getSavedDates(){try{return JSON.parse(localStorage.getItem('wm_saved_dates')||'[]')}catch(e){return[]}}
+function isDateSaved(d){return getSavedDates().includes(d)}
+function toggleSave(){var dates=getSavedDates();var idx=dates.indexOf(S.date);
+if(idx>=0){dates.splice(idx,1);showToast(S.date+' の保護を解除しました')}
+else{dates.push(S.date);showToast(S.date+' を保護しました（自動削除の対象外）')}
+localStorage.setItem('wm_saved_dates',JSON.stringify(dates));updateDateNav();render()}
+
+// Download report as JSON
+function downloadReport(){if(!S.cur||!S.employees[S.cur])return;
+var data={date:S.date,employee:S.cur,data:S.employees[S.cur]};
+var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+a.download='report_'+S.cur+'_'+S.date+'.json';a.click();URL.revokeObjectURL(a.href);
+showToast('レポートをダウンロードしました')}
+
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';setTimeout(function(){t.style.opacity='0'},2500)}
+
+async function chgDate(delta){const d=new Date(S.date);d.setDate(d.getDate()+delta);S.date=d.toISOString().split('T')[0];S.cur=null;await loadData(S.date);updateDateNav();renderEmpList();render()}
+(async()=>{await loadData(S.date);updateDateNav();renderEmpList();render()})();
 </script>
 </body>
 </html>"""
