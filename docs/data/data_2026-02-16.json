@@ -1,0 +1,142 @@
+{
+  "date": "2026-02-16",
+  "generated_at": "2026-02-16T18:30:00",
+  "employees": {
+    "池田龍太": {
+      "summary": {
+        "total_hours": "7h 42m",
+        "focus_score": 82,
+        "top_app": "申請用総合ソフト",
+        "top_app_pct": 38,
+        "total_chars": 12540
+      },
+      "time_breakdown": [
+        {"label": "登記申請書作成", "pct": 38, "color": "#4f46e5"},
+        {"label": "メール対応", "pct": 18, "color": "#0891b2"},
+        {"label": "オンライン申請", "pct": 15, "color": "#10b981"},
+        {"label": "書類作成(Excel)", "pct": 12, "color": "#f59e0b"},
+        {"label": "調査・確認", "pct": 10, "color": "#8b5cf6"},
+        {"label": "その他", "pct": 7, "color": "#9ca3af"}
+      ],
+      "timeline": [
+        {"time": "09:00", "label": "メール確認・返信", "desc": "Outlook - 受信トレイ確認、クライアント返信3件", "category": "email"},
+        {"time": "09:35", "label": "登記申請書作成", "desc": "申請用総合ソフト - 所有権移転登記", "category": "work"},
+        {"time": "10:45", "label": "電話対応", "desc": "クライアントからの問い合わせ対応", "category": "meeting"},
+        {"time": "11:00", "label": "オンライン申請", "desc": "登記ねっと - 申請データ送信", "category": "work"},
+        {"time": "12:00", "label": "昼休憩", "desc": "", "category": "idle"},
+        {"time": "13:00", "label": "書類作成", "desc": "Excel - 見積書・請求書作成", "category": "work"},
+        {"time": "14:30", "label": "登記申請書作成", "desc": "申請用総合ソフト - 抵当権設定登記", "category": "work"},
+        {"time": "15:45", "label": "法務局サイト確認", "desc": "ブラウザ - 登記情報提供サービス", "category": "work"},
+        {"time": "16:30", "label": "メール対応", "desc": "Outlook - 依頼者への進捗報告", "category": "email"},
+        {"time": "17:00", "label": "日報作成・退勤準備", "desc": "Excel - 業務日報入力", "category": "work"}
+      ],
+      "activity_bars": {
+        "09": [30, 60, 0, 10, 0],
+        "10": [65, 0, 15, 10, 10],
+        "11": [70, 0, 0, 20, 10],
+        "12": [0, 0, 0, 100, 0],
+        "13": [75, 0, 0, 15, 10],
+        "14": [80, 0, 0, 10, 10],
+        "15": [60, 0, 0, 15, 25],
+        "16": [30, 55, 0, 10, 5],
+        "17": [50, 0, 0, 50, 0]
+      },
+      "focus_hours": [9, 18],
+      "focus_data": [72, 85, 78, 10, 80, 88, 75, 82, 45],
+      "suggestions": [
+        {
+          "level": "high",
+          "title": "メール対応を時間帯で集約",
+          "desc": "午前と午後に各1回、メール確認・返信の時間を設けることで、作業の中断を減らし集中力を維持できます。現在は散発的にメール対応しており、申請書作成の集中が途切れています。"
+        },
+        {
+          "level": "mid",
+          "title": "午後の集中時間帯を活用",
+          "desc": "14:00-16:00が最も集中度が高い時間帯です。この時間に重要な登記申請書の作成を優先的に配置すると効率が上がります。"
+        },
+        {
+          "level": "low",
+          "title": "オンライン申請のバッチ処理",
+          "desc": "複数の申請をまとめて送信することで、ログイン・ログアウトの手間を削減できます。午前中にまとめて処理すると午後の作業に集中できます。"
+        }
+      ],
+      "screenshot_files": [],
+      "window_log": [
+        {"timestamp": "2026-02-16T09:02:15", "process_name": "OUTLOOK.EXE", "active_window": "受信トレイ - Outlook"},
+        {"timestamp": "2026-02-16T09:15:30", "process_name": "OUTLOOK.EXE", "active_window": "RE: 所有権移転登記の件 - Outlook"},
+        {"timestamp": "2026-02-16T09:35:42", "process_name": "申請用総合ソフト.exe", "active_window": "申請用総合ソフト - 所有権移転登記申請書"},
+        {"timestamp": "2026-02-16T10:12:05", "process_name": "chrome.exe", "active_window": "登記情報提供サービス - Google Chrome"},
+        {"timestamp": "2026-02-16T10:30:18", "process_name": "申請用総合ソフト.exe", "active_window": "申請用総合ソフト - 所有権移転登記申請書"},
+        {"timestamp": "2026-02-16T11:00:50", "process_name": "chrome.exe", "active_window": "登記・供託オンライン申請システム - Google Chrome"},
+        {"timestamp": "2026-02-16T13:05:22", "process_name": "EXCEL.EXE", "active_window": "見積書_20260216.xlsx - Excel"},
+        {"timestamp": "2026-02-16T13:45:10", "process_name": "EXCEL.EXE", "active_window": "請求書_田中様.xlsx - Excel"},
+        {"timestamp": "2026-02-16T14:30:55", "process_name": "申請用総合ソフト.exe", "active_window": "申請用総合ソフト - 抵当権設定登記申請書"},
+        {"timestamp": "2026-02-16T15:45:30", "process_name": "chrome.exe", "active_window": "登記情報提供サービス - Google Chrome"},
+        {"timestamp": "2026-02-16T16:30:15", "process_name": "OUTLOOK.EXE", "active_window": "進捗報告: 登記申請完了のお知らせ - Outlook"},
+        {"timestamp": "2026-02-16T17:00:40", "process_name": "EXCEL.EXE", "active_window": "業務日報_202602.xlsx - Excel"}
+      ]
+    },
+    "田中美咲": {
+      "summary": {
+        "total_hours": "8h 05m",
+        "focus_score": 76,
+        "top_app": "Excel",
+        "top_app_pct": 32,
+        "total_chars": 9870
+      },
+      "time_breakdown": [
+        {"label": "書類作成(Excel)", "pct": 32, "color": "#f59e0b"},
+        {"label": "メール対応", "pct": 25, "color": "#0891b2"},
+        {"label": "登記申請補助", "pct": 20, "color": "#4f46e5"},
+        {"label": "電話/来客対応", "pct": 13, "color": "#ef4444"},
+        {"label": "その他", "pct": 10, "color": "#9ca3af"}
+      ],
+      "timeline": [
+        {"time": "08:55", "label": "メール確認", "desc": "Outlook - 受信メール確認・仕分け", "category": "email"},
+        {"time": "09:30", "label": "書類整理", "desc": "Excel - 案件管理表の更新", "category": "work"},
+        {"time": "10:20", "label": "来客対応", "desc": "相談者対応・書類受領", "category": "meeting"},
+        {"time": "11:00", "label": "登記申請補助", "desc": "申請用総合ソフト - データ入力補助", "category": "work"},
+        {"time": "12:00", "label": "昼休憩", "desc": "", "category": "idle"},
+        {"time": "13:00", "label": "書類作成", "desc": "Word - 委任状・本人確認書類作成", "category": "work"},
+        {"time": "14:15", "label": "電話対応", "desc": "法務局への問い合わせ", "category": "meeting"},
+        {"time": "14:40", "label": "メール送信", "desc": "Outlook - クライアントへの書類送付", "category": "email"},
+        {"time": "15:30", "label": "経理処理", "desc": "Excel - 入金確認・帳簿入力", "category": "work"},
+        {"time": "17:00", "label": "退勤準備", "desc": "明日のスケジュール確認", "category": "work"}
+      ],
+      "activity_bars": {
+        "09": [40, 40, 0, 10, 10],
+        "10": [30, 0, 40, 20, 10],
+        "11": [60, 10, 0, 20, 10],
+        "12": [0, 0, 0, 100, 0],
+        "13": [70, 0, 0, 15, 15],
+        "14": [20, 30, 30, 10, 10],
+        "15": [65, 10, 0, 15, 10],
+        "16": [55, 20, 0, 15, 10],
+        "17": [30, 0, 0, 70, 0]
+      },
+      "focus_hours": [9, 18],
+      "focus_data": [68, 60, 72, 10, 78, 55, 75, 70, 35],
+      "suggestions": [
+        {
+          "level": "high",
+          "title": "来客対応の事前準備を効率化",
+          "desc": "来客時に必要な書類テンプレートを事前に準備しておくと、対応時間を短縮できます。よく使う委任状や本人確認書類のフォーマットをすぐに出せるようにしましょう。"
+        },
+        {
+          "level": "mid",
+          "title": "経理処理の自動化検討",
+          "desc": "入金確認と帳簿入力を手動で行っていますが、会計ソフトとの連携で自動化できる部分があります。月次で数時間の削減が見込めます。"
+        }
+      ],
+      "screenshot_files": [],
+      "window_log": [
+        {"timestamp": "2026-02-16T08:55:10", "process_name": "OUTLOOK.EXE", "active_window": "受信トレイ - Outlook"},
+        {"timestamp": "2026-02-16T09:30:25", "process_name": "EXCEL.EXE", "active_window": "案件管理表_2026.xlsx - Excel"},
+        {"timestamp": "2026-02-16T11:00:35", "process_name": "申請用総合ソフト.exe", "active_window": "申請用総合ソフト - 所有権移転登記申請書"},
+        {"timestamp": "2026-02-16T13:05:15", "process_name": "WINWORD.EXE", "active_window": "委任状_テンプレート.docx - Word"},
+        {"timestamp": "2026-02-16T14:40:50", "process_name": "OUTLOOK.EXE", "active_window": "書類送付のご連絡 - Outlook"},
+        {"timestamp": "2026-02-16T15:30:20", "process_name": "EXCEL.EXE", "active_window": "出納帳_202602.xlsx - Excel"}
+      ]
+    }
+  }
+}
