@@ -12,7 +12,7 @@ if %errorlevel% neq 0 goto :no_python
 
 REM Install dependencies
 echo Installing dependencies...
-pip install pyinstaller pillow pynput
+python -m pip install pyinstaller pillow pynput
 if %errorlevel% neq 0 goto :pip_fail
 
 REM Build single-file EXE (no console window)
