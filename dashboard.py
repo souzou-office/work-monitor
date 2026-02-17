@@ -97,7 +97,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-primary);color:va
 .suggestion-tag{display:inline-block;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500;margin-bottom:6px}
 .suggestion-high .suggestion-tag{background:rgba(79,70,229,.15);color:var(--accent)}.suggestion-mid .suggestion-tag{background:rgba(245,158,11,.15);color:var(--amber)}.suggestion-low .suggestion-tag{background:rgba(16,185,129,.15);color:var(--green)}
 .suggestion-title{font-size:13px;font-weight:600;margin-bottom:4px}.suggestion-desc{font-size:12px;color:var(--text-secondary);line-height:1.6}
-.ss-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.ss-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;max-height:480px;overflow-y:auto;padding-right:4px}
 .ss-thumb{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:all .15s;aspect-ratio:16/9;background:var(--bg-elevated)}
 .ss-thumb:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(79,70,229,.15);transform:translateY(-1px)}
 .ss-thumb img{width:100%;height:100%;object-fit:cover;display:block}
