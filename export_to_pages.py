@@ -46,7 +46,7 @@ def find_report_files(date_filter: str = None, days: int = None) -> list[Path]:
     return files
 
 
-SCREENSHOT_THUMB_WIDTH = 480   # thumbnail width for embedded screenshots
+SCREENSHOT_THUMB_WIDTH = 960   # thumbnail width for embedded screenshots
 
 
 def strip_screenshots(data: dict) -> dict:
@@ -90,7 +90,7 @@ def embed_screenshots(data: dict) -> dict:
                     img = img.resize(new_size, Image.LANCZOS)
 
                 buf = BytesIO()
-                img.save(buf, "JPEG", quality=40, optimize=True)
+                img.save(buf, "JPEG", quality=65, optimize=True)
                 b64 = base64.b64encode(buf.getvalue()).decode("ascii")
 
                 time_str = ss_file.stem.replace("ss_", "").replace("-", ":")

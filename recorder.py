@@ -30,7 +30,7 @@ WINDOW_CHECK_SECONDS = 2
 WORK_START_HOUR = 9
 WORK_END_HOUR = 23
 GDRIVE_BASE = Path("G:/マイドライブ/work_monitor")
-SCREENSHOT_MAX_WIDTH = 960         # resize width (None = no resize)
+SCREENSHOT_MAX_WIDTH = 1920        # resize width (None = no resize)
 SCREENSHOT_RETENTION_DAYS = 30     # auto-delete screenshots older than N days
 # ============================================================
 
@@ -215,7 +215,7 @@ def take_screenshot(save_path: str) -> bool:
             ratio = SCREENSHOT_MAX_WIDTH / img.width
             new_size = (SCREENSHOT_MAX_WIDTH, int(img.height * ratio))
             img = img.resize(new_size, getattr(__import__('PIL.Image', fromlist=['Image']), 'LANCZOS', 1))
-        img.save(save_path, "JPEG", quality=60, optimize=True)
+        img.save(save_path, "JPEG", quality=80, optimize=True)
         return True
     except Exception:
         return False
