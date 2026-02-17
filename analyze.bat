@@ -10,14 +10,16 @@ if "%ANTHROPIC_API_KEY%"=="" (
         )
     )
 )
-if "%ANTHROPIC_API_KEY%"=="" (
-    echo [ERROR] ANTHROPIC_API_KEY が設定されていません。
-    echo .env ファイルに ANTHROPIC_API_KEY=sk-ant-xxxxx を記載してください。
-    echo.
-    cmd /k
-    exit /b 1
-)
+if "%ANTHROPIC_API_KEY%"=="" goto :no_key
 
 echo Starting analysis...
 python analyzer.py %*
 cmd /k
+exit /b 0
+
+:no_key
+echo [ERROR] ANTHROPIC_API_KEY が設定されていません。
+echo .env ファイルに ANTHROPIC_API_KEY=sk-ant-xxxxx を記載してください。
+echo.
+cmd /k
+exit /b 1
