@@ -179,7 +179,7 @@ def main():
     parser = argparse.ArgumentParser(description="Export work monitor data to GitHub Pages")
     parser.add_argument("--date", default=None, help="Export specific date (YYYY-MM-DD)")
     parser.add_argument("--days", type=int, default=None, help="Export last N days")
-    parser.add_argument("--include-screenshots", action="store_true", help="Embed screenshot thumbnails as base64 in JSON")
+    parser.add_argument("--no-screenshots", action="store_true", help="Exclude screenshot thumbnails from JSON")
     parser.add_argument("--protect", nargs="+", default=None, help="Protect dates from auto-cleanup (create .keep files)")
     args = parser.parse_args()
 
@@ -201,7 +201,7 @@ def main():
         return
 
     print(f"Found {len(files)} report file(s):\n")
-    export_files(files, include_screenshots=args.include_screenshots)
+    export_files(files, include_screenshots=not args.no_screenshots)
 
 
 if __name__ == "__main__":
