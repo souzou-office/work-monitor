@@ -1,7 +1,8 @@
 @echo off
+chcp 65001 >nul
 cd /d "%~dp0"
 
-REM APIキーを設定してください（.envファイルがあればそちらが優先されます）
+REM .envファイルからAPIキーを読み込み
 if "%ANTHROPIC_API_KEY%"=="" (
     if exist .env (
         for /f "tokens=1,* delims==" %%a in (.env) do (
