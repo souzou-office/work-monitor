@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 >nul
 cd /d "%~dp0"
 echo ============================================
 echo   Work Monitor Recorder - EXE Build
@@ -18,7 +17,7 @@ if %errorlevel% neq 0 goto :pip_fail
 REM Build single-file EXE (no console window)
 echo.
 echo Building EXE...
-pyinstaller --onefile --noconsole --name work_recorder recorder.py
+python -m PyInstaller --onefile --noconsole --name work_recorder recorder.py
 if %errorlevel% neq 0 goto :build_fail
 
 echo.
@@ -34,25 +33,23 @@ exit /b 0
 
 :no_python
 echo.
-echo [ERROR] Python が見つかりません。
-echo https://www.python.org/downloads/ からインストールしてください。
-echo インストール時に「Add Python to PATH」にチェックを入れてください。
+echo [ERROR] Python not found.
+echo Please install from https://www.python.org/downloads/
+echo Check "Add Python to PATH" during installation.
 echo.
 cmd /k
 exit /b 1
 
 :pip_fail
 echo.
-echo [ERROR] pip install に失敗しました。
-echo Python と pip がインストールされているか確認してください。
+echo [ERROR] pip install failed.
 echo.
 cmd /k
 exit /b 1
 
 :build_fail
 echo.
-echo [ERROR] pyinstaller によるビルドに失敗しました。
-echo 上記のエラーメッセージを確認してください。
+echo [ERROR] PyInstaller build failed. See error messages above.
 echo.
 cmd /k
 exit /b 1
